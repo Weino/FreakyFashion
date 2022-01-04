@@ -5,6 +5,5 @@
         public Guid Id {  get; set; }  
         public Guid BasketId {  get; set; }
         public string CustomerName { get; set; } = string.Empty;
-
     }
 }

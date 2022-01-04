@@ -12,5 +12,7 @@ namespace FreakyFashionServices.StockService.Data
         {
 
         }
+
+        public DbSet<Order> Orders { get; set; }
     }
 }

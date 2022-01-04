@@ -4,7 +4,7 @@ namespace FreakyFashionServices.StockService.Repositories.Interfaces
 {
     public interface IOrderRepository
     {
-        Task<List<OrderDTO>> GetOrder(); 
-        Task<OrderDTO> GetOrder(int id);
+        Task<List<OrderDTO>> GetAllOrders(); 
+        Task<OrderDTO> GetOrder(Guid id);
     }
 }
