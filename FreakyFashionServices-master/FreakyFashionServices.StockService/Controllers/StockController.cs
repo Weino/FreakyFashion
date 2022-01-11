@@ -12,15 +12,15 @@ namespace FreakyFashionServices.StockService.Controllers
     {
         public StockController(StockServiceContext context)
         {
-            Context = context;
+            _ctx = context;
         }
 
-        private StockServiceContext Context { get; }
+        private StockServiceContext _ctx { get; }
 
         [HttpPut("{articleNumber}")]
         public IActionResult UpdateStockLevel(string articleNumber, UpdateStockLevelDto updateStockLevelDto)
         {
-            var stockLevel = Context.StockLevel
+            var stockLevel = _ctx.StockLevel
                 .FirstOrDefault(x => x.ArticleNumber == updateStockLevelDto.ArticleNumber);
 
             if (stockLevel == null)
@@ -31,14 +31,14 @@ namespace FreakyFashionServices.StockService.Controllers
                     updateStockLevelDto.StockLevel
                 );
 
-                Context.StockLevel.Add(stockLevel);
+                _ctx.StockLevel.Add(stockLevel);
             }
             else
             {
                 stockLevel.Stock = updateStockLevelDto.StockLevel;
             }
 
-            Context.SaveChanges();
+            _ctx.SaveChanges();
 
             return NoContent(); // 204 No Content
         }
@@ -46,7 +46,7 @@ namespace FreakyFashionServices.StockService.Controllers
         [HttpGet]
         public IEnumerable<StockLevelDto> GetAll()
         {
-            var stockLevelDtos = Context.StockLevel.Select(x => new StockLevelDto
+            var stockLevelDtos = _ctx.StockLevel.Select(x => new StockLevelDto
             {
                 ArticleNumber = x.ArticleNumber,
                 Stock = x.Stock

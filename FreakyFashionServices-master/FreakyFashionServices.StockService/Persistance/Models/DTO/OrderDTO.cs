@@ -2,8 +2,8 @@
 {
     public class OrderDTO
     {
-        public Guid Id {  get; set; }  
-        public Guid BasketId {  get; set; }
-        public string CustomerName { get; set; } = string.Empty;
+        public int Id {  get; set; }  
+        public string Customer{ get; set; } = string.Empty;
+        public List<LineItemDTO> Products { get; set; }   = new List<LineItemDTO>();
     }
 }

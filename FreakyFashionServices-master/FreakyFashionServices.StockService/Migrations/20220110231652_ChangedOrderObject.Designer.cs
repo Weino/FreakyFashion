@@ -4,6 +4,7 @@ using FreakyFashionServices.StockService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreakyFashionServices.StockService.Migrations
 {
     [DbContext(typeof(StockServiceContext))]
-    partial class StockServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20220110231652_ChangedOrderObject")]
+    partial class ChangedOrderObject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

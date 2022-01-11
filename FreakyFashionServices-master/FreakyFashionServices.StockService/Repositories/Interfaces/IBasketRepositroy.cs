@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FreakyFashionServices.StockService.Repositories.Interfaces
 {
-    public interface IOrderRepository
+    public interface IBasketRepository
     {
-        public List<Order> GetAllOrders(); 
-        public Order? GetOrder(int id);
-        public Order? CreateOrder(CreateOrderDTO o);
+
+        public Basket? AddProductToBasket(int basketId, [FromBody] LineItemDTO lineItem);
+        public Basket? GetBasket(int basketId);
+        public Basket CreateBasket();
+
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Basket
     {
-        public Guid Id {  get; set; }
-        public List<LineItem> Items { get; set; } = new();
+        public int Id { get; set; }
+        public string JsonItems { get; set; } = string.Empty;   
     }
 }

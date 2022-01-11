@@ -4,6 +4,7 @@ using FreakyFashionServices.StockService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreakyFashionServices.StockService.Migrations
 {
     [DbContext(typeof(StockServiceContext))]
-    partial class StockServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20220106162834_RemovedCustomerName")]
+    partial class RemovedCustomerName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,6 +41,28 @@ namespace FreakyFashionServices.StockService.Migrations
                     b.ToTable("Baskets");
                 });
 
+            modelBuilder.Entity("FreakyFashionServices.StockService.Models.Domain.LineItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("LineItem");
+                });
+
             modelBuilder.Entity("FreakyFashionServices.StockService.Models.Domain.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -51,10 +75,6 @@ namespace FreakyFashionServices.StockService.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Customer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JsonItems")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -108,6 +128,18 @@ namespace FreakyFashionServices.StockService.Migrations
                     b.HasKey("ArticleNumber");
 
                     b.ToTable("StockLevel");
+                });
+
+            modelBuilder.Entity("FreakyFashionServices.StockService.Models.Domain.LineItem", b =>
+                {
+                    b.HasOne("FreakyFashionServices.StockService.Models.Domain.Order", null)
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("FreakyFashionServices.StockService.Models.Domain.Order", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
